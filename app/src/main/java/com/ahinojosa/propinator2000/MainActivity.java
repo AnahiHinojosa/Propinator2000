@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView number;
     private Button calc;
     private RadioGroup eleccion;
-    private int precio;
+    private String precio;
+    private Float total;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +50,39 @@ public class MainActivity extends AppCompatActivity {
             i.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    precio+=i.getText().toString();
-                    total_precio.
+                    precio += i.getText().toString();
+                    number.setText(precio);
                 }
             });
 
         }
+        calc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int id = eleccion.getCheckedRadioButtonId();
+                RadioButton op = findViewById(id);
+                String text = op.getText().toString();
+                total = Float.parseFloat(number.getText().toString());
+                float propina;
+                switch (text){
+                    case "Mala" :
+                        propina = (float) (total * 0.05);
+                        number.setText("Total a pagar : " + (total + propina));
+                        break;
+
+                    case "Media" :
+                        propina = (float) (total * 0.10);
+                        number.setText("Total a pagar : " + (total + propina));
+                        break;
+                    case  "Buena" :
+                        propina = (float) (total * 0.20);
+                        number.setText("Total a pagar : " + (total + propina));
+                        break;
+                };
+
+            }
+        });
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
