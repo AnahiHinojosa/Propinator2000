@@ -16,10 +16,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
     private Button[] buttons;
-    private RadioButton selecionado;
     private TextView text;
     private TextView number;
-    private Button calc;
+    private Button calc,del;
     private RadioGroup eleccion;
     private String precio;
     private Float total;
@@ -29,9 +28,9 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        RadioGroup eleccion = findViewById(R.id.radios);
         TextView number = findViewById(R.id.numeros);
         Button calc = findViewById(R.id.calcular);
+        Button del = findViewById(R.id.borrar);
         TextView text = findViewById(R.id.textprincipal);
         buttons = new Button[]{
                 findViewById(R.id.uno),
@@ -82,7 +81,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+        del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                number.setText(" ");
+            }
+        });
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
