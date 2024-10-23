@@ -3,7 +3,6 @@ package com.ahinojosa.propinator2000;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -20,8 +19,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView number;
     private Button calc,del;
     private RadioGroup eleccion;
-    private String precio;
-    private Float total;
+    private String precio = "";
+    private Double total;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.siete),
                 findViewById(R.id.ocho),
                 findViewById(R.id.nueve),
-                findViewById(R.id.cero)
+                findViewById(R.id.cero),
+                findViewById(R.id.punto)
         };
 
         for (Button i:buttons) {
@@ -61,29 +63,32 @@ public class MainActivity extends AppCompatActivity {
                 int id = eleccion.getCheckedRadioButtonId();
                 RadioButton op = findViewById(id);
                 String text = op.getText().toString();
-                total = Float.parseFloat(number.getText().toString());
-                float propina;
+                total = Double.parseDouble(number.getText().toString());
+                double propina;
+
                 switch (text){
                     case "Mala" :
-                        propina = (float) (total * 0.05);
-                        number.setText("Total a pagar : " + (total + propina));
+                        propina = total * 0.05;
+                        number.setText("Total a pagar : " +(total + propina));
                         break;
 
                     case "Media" :
-                        propina = (float) (total * 0.10);
-                        number.setText("Total a pagar : " + (total + propina));
+                        propina = total * 0.10;
+                        number.setText("Total a pagar : " +(total + propina));
                         break;
                     case  "Buena" :
-                        propina = (float) (total * 0.20);
-                        number.setText("Total a pagar : " + (total + propina));
+                        propina = total * 0.20;
+                        number.setText("Total a pagar : " +(total + propina));
                         break;
-                };
+                }
 
             }
         });
         del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                precio = "";
+                number.setText(precio);
                 number.setText(" ");
             }
         });
