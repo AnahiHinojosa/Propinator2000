@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         Button calc = findViewById(R.id.calcular);
         Button del = findViewById(R.id.borrar);
         TextView text = findViewById(R.id.textprincipal);
+        RadioGroup eleccion = findViewById(R.id.radios);
         buttons = new Button[]{
                 findViewById(R.id.uno),
                 findViewById(R.id.dos),
@@ -62,23 +63,23 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int id = eleccion.getCheckedRadioButtonId();
                 RadioButton op = findViewById(id);
-                String text = op.getText().toString();
+                String text1 = op.getText().toString();
                 total = Double.parseDouble(number.getText().toString());
                 double propina;
 
-                switch (text){
+                switch (text1){
                     case "Mala" :
                         propina = total * 0.05;
-                        number.setText("Total a pagar : " +(total + propina));
+                        text.setText("Total a pagar : " +(total + propina));
                         break;
 
                     case "Media" :
                         propina = total * 0.10;
-                        number.setText("Total a pagar : " +(total + propina));
+                        text.setText("Total a pagar : " +(total + propina));
                         break;
                     case  "Buena" :
                         propina = total * 0.20;
-                        number.setText("Total a pagar : " +(total + propina));
+                        text.setText("Total a pagar : " +(total + propina));
                         break;
                 }
 
